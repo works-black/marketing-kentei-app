@@ -1,22 +1,15 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { InterviewProvider } from '@/context/InterviewContext';
 
 export const metadata: Metadata = {
-  title: 'WILL面談ツール',
-  description: 'Will B プログラム 面談サポートツール',
+  title: 'マーケティング検定2級 対策アプリ',
+  description: 'AIが生成する四択問題でマーケティング検定2級を対策',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body>
-        <InterviewProvider>{children}</InterviewProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

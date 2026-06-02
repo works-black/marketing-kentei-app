@@ -1,53 +1,28 @@
-export type Phase = 1 | 2 | 3 | 4 | 5;
-
-export interface QuestionResponse {
-  question: string;
-  intent: string;
-  followup_triggers: string[];
-}
-
-export interface Message {
+export type Field = {
   id: string;
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-  phase?: Phase;
-  meta?: Pick<QuestionResponse, 'intent' | 'followup_triggers'>;
-}
+  name: string;
+  description: string;
+};
 
-export interface QolScores {
-  外出意欲: number;
-  移動能力: number;
-  社会参加: number;
-  精神的健康: number;
-  身体的健康: number;
-  生活満足度: number;
-}
+export type Question = {
+  id: string;
+  fieldId: string;
+  text: string;
+  choices: string[];
+  correctIndex: number;
+  explanation: string;
+};
 
-export interface MonthPlan {
-  month: number;
-  destination: string;
-  purpose: string;
-}
+export type Answer = {
+  questionId: string;
+  selectedIndex: number;
+  isCorrect: boolean;
+};
 
-export interface InterviewSummary {
-  barriers: string[];
-  strengths: string[];
-  goal: string;
-  notes: string;
-}
-
-export interface Plan {
-  summary: InterviewSummary;
-  months: MonthPlan[];
-  firstSteps: string[];
-  notes: string;
-}
-
-export interface InterviewState {
-  messages: Message[];
-  currentPhase: Phase;
-  qolScores: QolScores | null;
-  plan: Plan | null;
-  isComplete: boolean;
-}
+export type SessionState = {
+  fieldId: string;
+  questions: Question[];
+  answers: Answer[];
+  currentIndex: number;
+  phase: 'selecting' | 'quiz' | 'result';
+};
