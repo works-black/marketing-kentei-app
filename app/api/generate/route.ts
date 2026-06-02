@@ -3,9 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { getField } from "@/lib/fields";
 import type { Question } from "@/lib/types";
 
-const client = new Anthropic();
-
 export async function POST(request: NextRequest) {
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return NextResponse.json(
+      { error: "ANTHROPIC_API_KEY が設定されていません" },
+      { status: 500 }
+    );
+  }
+  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
   const { fieldId } = await request.json();
 
   const field = getField(fieldId);
