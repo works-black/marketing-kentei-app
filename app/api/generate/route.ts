@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
   }
 
   const response = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-4-5",
     max_tokens: 4096,
     system: `あなたはマーケティング検定2級の試験問題作成の専門家です。
 指定された分野について、実際の検定試験レベルの四択問題を5問作成してください。
